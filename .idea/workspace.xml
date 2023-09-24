@@ -7,11 +7,15 @@
     <list default="true" id="2ce3b47b-d24f-4ebb-8c65-176911081d1c" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant.global-stack.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/conf-cdk-pipeline.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/conf-cdk-restaurant-frontend.test.ts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/conf-cdk-restaurant-global.test.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/website/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/conf-cdk-restaurant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/bin/conf-cdk-restaurant.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/conf-cdk-restaurant-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/conf-cdk-restaurant.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/conf-cdk-restaurant.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/conf-cdk-restaurant.test.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +42,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/randyvroegop/IdeaProjects/conf-cdk-restaurant/lib",
+    "last_opened_file_path": "/Users/randyvroegop/IdeaProjects/conf-cdk-restaurant/test",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -51,6 +55,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/presentation/img" />
     </key>
@@ -70,12 +75,30 @@
       <updated>1693065886402</updated>
       <workItem from="1693065887938" duration="16611000" />
       <workItem from="1693114053904" duration="29009000" />
-      <workItem from="1695541008809" duration="2341000" />
+      <workItem from="1695541008809" duration="2595000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/bin/conf-cdk-restaurant.d.ts" />
+        <option value="$PROJECT_DIR$/bin/conf-cdk-restaurant.js" />
+        <option value="$PROJECT_DIR$/lib/conf-cdk-restaurant.global-stack.js" />
+        <option value="$PROJECT_DIR$/lib/conf-cdk-restaurant.global-stack.d.ts" />
+        <option value="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.d.ts" />
+        <option value="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.js" />
+        <option value="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.d.ts" />
+        <option value="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.js" />
+        <option value="$PROJECT_DIR$/test/conf-cdk-restaurant-frontend.test.ts.js" />
+        <option value="$PROJECT_DIR$/test/conf-cdk-pipeline.test.js" />
+        <option value="$PROJECT_DIR$/test/conf-cdk-restaurant-global.test.js" />
+        <option value="$PROJECT_DIR$/test/conf-cdk-restaurant-frontend.test.ts.d.ts" />
+        <option value="$PROJECT_DIR$/test/conf-cdk-restaurant-global.test.d.ts" />
+        <option value="$PROJECT_DIR$/test/conf-cdk-pipeline.test.d.ts" />
+      </list>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
