@@ -3,11 +3,11 @@
 // import * as ConfCdkRestaurant from '../lib/conf-cdk-restaurant-stack';
 
 // example test. To run these tests, uncomment this file along with the
-// example resource in lib/conf-cdk-restaurant-stack.ts
+// example resource in lib/conf-cdk-restaurant-frontend-stack.ts
 test('SQS Queue Created', () => {
 //   const app = new cdk.App();
 //     // WHEN
-//   const stack = new ConfCdkRestaurant.ConfCdkRestaurantStack(app, 'MyTestStack');
+//   const stack = new ConfCdkRestaurant.ConfCdkRestaurantFrontendStack(app, 'MyTestStack');
 //     // THEN
 //   const template = Template.fromStack(stack);
 
