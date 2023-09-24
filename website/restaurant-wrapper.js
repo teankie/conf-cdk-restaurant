@@ -1,5 +1,5 @@
 // Import the LitElement base class and html helper function
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js';
 
 // Extend the LitElement base class
 class RestaurantWrapper extends LitElement {
