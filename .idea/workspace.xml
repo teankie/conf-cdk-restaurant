@@ -7,7 +7,16 @@
     <list default="true" id="2ce3b47b-d24f-4ebb-8c65-176911081d1c" name="Changes" comment="Add website files">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/conf-cdk-restaurant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/bin/conf-cdk-restaurant.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/conf-cdk-restaurant.global-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant.global-stack.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/conf-cdk-pipeline.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/conf-cdk-pipeline.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/conf-cdk-restaurant-frontend.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/conf-cdk-restaurant-frontend.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/conf-cdk-restaurant-global.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/conf-cdk-restaurant-global.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/kitchen-app.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/kitchen-app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/kitchen.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/kitchen.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/waiter-app.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/waiter-app.js" afterDir="false" />
@@ -107,7 +116,7 @@
       <updated>1693065886402</updated>
       <workItem from="1693065887938" duration="16611000" />
       <workItem from="1693114053904" duration="29009000" />
-      <workItem from="1695541008809" duration="41153000" />
+      <workItem from="1695541008809" duration="47182000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase">
       <option name="closed" value="true" />

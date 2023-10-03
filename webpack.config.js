@@ -15,7 +15,7 @@ module.exports = {
         },
         open: true,
         compress: true,
-        port: 8000,
+        port: 8001,
         liveReload: true,
     },
     plugins: [

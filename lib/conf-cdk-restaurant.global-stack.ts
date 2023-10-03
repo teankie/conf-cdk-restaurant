@@ -5,16 +5,16 @@ import {Stack, StackProps} from "aws-cdk-lib";
 
 export class ConfCdkRestaurantGlobalStack extends Stack {
   public confCdkRestaurantDistributionCertificate: Certificate;
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props: StackProps, subdomain: string) {
     super(scope, id, props);
 
     const hostedZone = HostedZone.fromLookup(this, 'cloud101HostedZone', {
       domainName: 'cloud101.nl'
     });
 
-    this.confCdkRestaurantDistributionCertificate = new Certificate(this, 'restaurant.cloud101-certificate', {
-      domainName: 'restaurant.cloud101.nl',
-      certificateName: 'restaurant.cloud101-certificate',
+    this.confCdkRestaurantDistributionCertificate = new Certificate(this, subdomain + '.cloud101-certificate', {
+      domainName: subdomain + '.cloud101.nl',
+      certificateName: subdomain + '.cloud101-certificate',
       validation: CertificateValidation.fromDns(hostedZone),
     });
   }

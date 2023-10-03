@@ -6,11 +6,11 @@ test('Certificate Created for cloud101.nl', () => {
     const app = new App();
     const stack = new ConfCdkRestaurantGlobalStack(app, 'TestStack', {
         env: { region: 'us-east-1', account: '531843824238' }
-    });
+    }, 'subdomain');
 
     const template = Template.fromStack(stack);
 
     template.hasResourceProperties('AWS::CertificateManager::Certificate', {
-        DomainName: 'restaurant.cloud101.nl',
+        DomainName: 'subdomain.cloud101.nl',
     });
 });

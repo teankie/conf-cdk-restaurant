@@ -12,4 +12,6 @@ test('Pipeline is created', () => {
     const template = Template.fromStack(stack);
 
     template.hasResourceProperties('AWS::CodePipeline::Pipeline', {});
+
+    expect(stack.subdomain).not.toBe('restaurant-changeit');
 });

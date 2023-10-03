@@ -5,10 +5,10 @@
     "conf-cdk-restaurant": "bin/conf-cdk-restaurant.js"
   },
   "scripts": {
-    "build": "tsc && npx webpack",
+    "build": "tsc && webpack",
     "watch": "tsc -w",
-    "serve": "es-dev-server --app-index website/index.html --node-resolve --watch --open",
-    "test": "jest",
+    "serve": "webpack serve",
+    "test": "tsc && jest",
     "cdk": "cdk"
   },
   "devDependencies": {

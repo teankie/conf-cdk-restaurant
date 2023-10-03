@@ -8,7 +8,7 @@ test('S3 Bucket Created', () => {
     const stack = new ConfCdkRestaurantFrontendStack(app, 'TestStack', {
         confCdkRestaurantDistributionCertificate: { certificateArn: 'arn:aws:fake:us-east-1:123456789012:example-fakename' } as Certificate,
         env: { region: 'eu-west-1', account: '531843824238' }
-    });
+    }, 'subdomain');
 
     const template = Template.fromStack(stack);
 
@@ -20,7 +20,7 @@ test('CloudFront Distribution Created', () => {
     const stack = new ConfCdkRestaurantFrontendStack(app, 'TestStack', {
         confCdkRestaurantDistributionCertificate: { certificateArn: 'arn:aws:fake:us-east-1:123456789012:example-fakename' } as Certificate,
         env: { region: 'eu-west-1', account: '531843824238' }
-    });
+    }, 'subdomain');
 
     const template = Template.fromStack(stack);
 
@@ -32,7 +32,7 @@ test('Route53 A Record Created for CloudFront Distribution', () => {
     const stack = new ConfCdkRestaurantFrontendStack(app, 'TestStack', {
         confCdkRestaurantDistributionCertificate: { certificateArn: 'arn:aws:fake:us-east-1:123456789012:example-fakename' } as Certificate,
         env: { region: 'eu-west-1', account: '531843824238' }
-    });
+    }, 'subdomain');
 
     const template = Template.fromStack(stack);
 

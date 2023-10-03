@@ -14,7 +14,7 @@ interface ConfCdkRestaurantFrontendProps extends StackProps {
 }
 
 export class ConfCdkRestaurantFrontendStack extends Stack {
-  constructor(scope: Construct, id: string, props?: ConfCdkRestaurantFrontendProps) {
+  constructor(scope: Construct, id: string, props: ConfCdkRestaurantFrontendProps, subdomain: string) {
     super(scope, id, props);
 
     // Point to existing hosted zone
@@ -24,37 +24,37 @@ export class ConfCdkRestaurantFrontendStack extends Stack {
 
     // Create a bucket in which we can place our website
     const bucket = new Bucket(this, 'Bucket', {
-      bucketName: 'restaurant.cloud101.nl',
+      bucketName: subdomain + '.cloud101.nl',
       accessControl: BucketAccessControl.PRIVATE,
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
 
     // Deploy the website to the bucket
-    new BucketDeployment(this, 'RestaurantBucketDeployment', {
+    new BucketDeployment(this, 'BucketDeployment', {
       destinationBucket: bucket,
       sources: [ Source.asset(path.resolve(__dirname, '../website/dist')) ],
       retainOnDelete: false,
     });
 
     // Grant access to the bucket for the distribution
-    const originAccessIdentity = new OriginAccessIdentity(this, 'RestaurantOriginAccessIdentity');
+    const originAccessIdentity = new OriginAccessIdentity(this, 'OriginAccessIdentity');
     bucket.grantRead(originAccessIdentity);
 
     // Make a cloudfront distribution (CDN) to access the bucket without public access
-    const distribution = new Distribution(this, 'RestaurantDistribution', {
+    const distribution = new Distribution(this, 'Distribution', {
       defaultRootObject: 'index.html',
       defaultBehavior: {
         origin: new S3Origin(bucket, { originAccessIdentity }),
         // Cache disabled is not recommended here, instead removing cache on deployments via pipeline is desired
         cachePolicy: CachePolicy.CACHING_DISABLED
       },
-      domainNames: [ 'restaurant.cloud101.nl' ],
+      domainNames: [ subdomain + '.cloud101.nl' ],
       certificate: props?.confCdkRestaurantDistributionCertificate,
     });
 
     new ARecord(this, 'AliasRecord', {
-      recordName: "restaurant.cloud101.nl.",
+      recordName: subdomain + '.cloud101.nl.',
       zone: hostedZone,
       target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
     });
