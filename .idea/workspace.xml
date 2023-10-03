@@ -7,10 +7,11 @@
     <list default="true" id="2ce3b47b-d24f-4ebb-8c65-176911081d1c" name="Changes" comment="Add website files">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/kitchen-app.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/kitchen-app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/kitchen.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/kitchen.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/waiter-app.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/waiter-app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/waiter.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/waiter.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +20,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "vroegop"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="1a2334bc-0bba-4c57-95d8-04ebe10af805" />
+        <option name="url" value="git@github.com:vroegop/conf-cdk-restaurant.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -68,12 +83,16 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.index.html (1)">
+    <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/conf-cdk-restaurant/website/dist/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/conf-cdk-restaurant/dist/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html (1)" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
@@ -88,7 +107,7 @@
       <updated>1693065886402</updated>
       <workItem from="1693065887938" duration="16611000" />
       <workItem from="1693114053904" duration="29009000" />
-      <workItem from="1695541008809" duration="40165000" />
+      <workItem from="1695541008809" duration="41153000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase">
       <option name="closed" value="true" />

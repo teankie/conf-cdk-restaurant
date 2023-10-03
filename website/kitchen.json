@@ -1,54 +1,56 @@
 {
+  "restaurant": {
     "orders": [
-        {
-            "id": "order1",
-            "items": [
-                {
-                    "name": "Cheeseburger",
-                    "quantity": 1
-                }
-            ],
-            "status": "preparing"
-        },
-        {
-            "id": "order2",
-            "items": [
-                {
-                    "name": "Hamburger",
-                    "quantity": 2
-                },
-                {
-                    "name": "Fries",
-                    "quantity": 2
-                },
-                {
-                    "name": "Cola Zero",
-                    "quantity": 1
-                },
-                {
-                    "name": "Orange",
-                    "quantity": 1
-                }
-            ],
-            "status": "preparing"
-        },
-        {
-            "id": "order3",
-            "items": [
-                {
-                    "name": "Meatless Burger",
-                    "quantity": 2
-                },
-                {
-                    "name": "Curly Fries",
-                    "quantity": 2
-                },
-                {
-                    "name": "Ice Tea",
-                    "quantity": 2
-                }
-            ],
-            "status": "preparing"
-        }
+      {
+        "id": "order1",
+        "items": [
+          {
+            "name": "Cheeseburger",
+            "quantity": 1
+          }
+        ],
+        "status": "preparing"
+      },
+      {
+        "id": "order2",
+        "items": [
+          {
+            "name": "Hamburger",
+            "quantity": 2
+          },
+          {
+            "name": "Fries",
+            "quantity": 2
+          },
+          {
+            "name": "Cola Zero",
+            "quantity": 1
+          },
+          {
+            "name": "Orange",
+            "quantity": 1
+          }
+        ],
+        "status": "preparing"
+      },
+      {
+        "id": "order3",
+        "items": [
+          {
+            "name": "Meatless Burger",
+            "quantity": 2
+          },
+          {
+            "name": "Curly Fries",
+            "quantity": 2
+          },
+          {
+            "name": "Ice Tea",
+            "quantity": 2
+          }
+        ],
+        "status": "preparing"
+      }
     ]
+  }
 }

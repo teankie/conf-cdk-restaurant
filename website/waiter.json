@@ -1,91 +1,91 @@
 {
-    "restaurant": {
-        "tables": {
-            "table-1": {
-                "id": "table-1",
-                "name": "1",
-                "currentOrder": {
-                    "items": [
-                        {
-                            "id": "item1",
-                            "quantity": 2
-                        },
-                        {
-                            "id": "item2",
-                            "quantity": 1
-                        }
-                    ],
-                    "status": "open"
-                },
-                "previousOrders": [
-                    {
-                        "id": "ord122",
-                        "items": [
-                            {
-                                "id": "item1",
-                                "quantity": 1
-                            }
-                        ],
-                        "status": "preparing"
-                    }
-                ]
+  "restaurant": {
+    "tables": {
+      "table-1": {
+        "id": "table-1",
+        "name": "1",
+        "currentOrder": {
+          "items": [
+            {
+              "id": "item1",
+              "quantity": 2
             },
-            "table-2": {
-                "id": "table-2",
-                "name": "2",
-                "currentOrder": {
-                    "id": "ord124",
-                    "items": [],
-                    "status": "open"
-                },
-                "previousOrders": []
-            },
-            "table-3": {
-                "id": "table-3",
-                "name": "3",
-                "currentOrder": {
-                    "id": "ord125",
-                    "items": [],
-                    "status": "open"
-                },
-                "previousOrders": []
-            },
-            "table-4": {
-                "id": "table-4",
-                "name": "4",
-                "currentOrder": {
-                    "id": "ord126",
-                    "items": [],
-                    "status": "open"
-                },
-                "previousOrders": []
+            {
+              "id": "item2",
+              "quantity": 1
             }
+          ],
+          "status": "open"
         },
-        "products": {
-            "item1": {
+        "previousOrders": [
+          {
+            "id": "ord122",
+            "items": [
+              {
                 "id": "item1",
-                "name": "Ramen",
-                "icon": "ramen_dining",
-                "price": 5.99
-            },
-            "item2": {
-                "id": "item2",
-                "name": "Tapas",
-                "icon": "tapas",
-                "price": 29.99
-            },
-            "item3": {
-                "id": "item3",
-                "name": "Poke Bowl Salmon",
-                "icon": "rice_bowl",
-                "price": 7.99
-            },
-            "item4": {
-                "id": "item4",
-                "name": "Poke Bowl Tofu",
-                "icon": "rice_bowl",
-                "price": 7.99
-            }
-        }
+                "quantity": 1
+              }
+            ],
+            "status": "preparing"
+          }
+        ]
+      },
+      "table-2": {
+        "id": "table-2",
+        "name": "2",
+        "currentOrder": {
+          "id": "ord124",
+          "items": [],
+          "status": "open"
+        },
+        "previousOrders": []
+      },
+      "table-3": {
+        "id": "table-3",
+        "name": "3",
+        "currentOrder": {
+          "id": "ord125",
+          "items": [],
+          "status": "open"
+        },
+        "previousOrders": []
+      },
+      "table-4": {
+        "id": "table-4",
+        "name": "4",
+        "currentOrder": {
+          "id": "ord126",
+          "items": [],
+          "status": "open"
+        },
+        "previousOrders": []
+      }
+    },
+    "products": {
+      "item1": {
+        "id": "item1",
+        "name": "Ramen",
+        "icon": "ramen_dining",
+        "price": 5.99
+      },
+      "item2": {
+        "id": "item2",
+        "name": "Tapas",
+        "icon": "tapas",
+        "price": 29.99
+      },
+      "item3": {
+        "id": "item3",
+        "name": "Poke Bowl Salmon",
+        "icon": "rice_bowl",
+        "price": 7.99
+      },
+      "item4": {
+        "id": "item4",
+        "name": "Poke Bowl Tofu",
+        "icon": "rice_bowl",
+        "price": 7.99
+      }
     }
+  }
 }
