@@ -9,7 +9,9 @@
       <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/website/kitchen.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/website/waiter.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/counter-app.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/login-app.js" afterDir="false" />
@@ -55,7 +57,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.sourceCode.JavaScript",
-    "ts.external.directory.path": "/Users/randyvroegop/Applications/IntelliJ IDEA Ultimate.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/Users/randyvroegop/IdeaProjects/conf-cdk-restaurant/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -94,7 +96,7 @@
       <updated>1693065886402</updated>
       <workItem from="1693065887938" duration="16611000" />
       <workItem from="1693114053904" duration="29009000" />
-      <workItem from="1695541008809" duration="37510000" />
+      <workItem from="1695541008809" duration="39894000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase">
       <option name="closed" value="true" />
