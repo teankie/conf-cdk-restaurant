@@ -5,7 +5,7 @@
     "conf-cdk-restaurant": "bin/conf-cdk-restaurant.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npx webpack",
     "watch": "tsc -w",
     "serve": "es-dev-server --app-index website/index.html --node-resolve --watch --open",
     "test": "jest",
