@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ce3b47b-d24f-4ebb-8c65-176911081d1c" name="Changes" comment="Add website files">
+      <change afterPath="$PROJECT_DIR$/readme/img/fork.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme/img/pipeline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme/img/secret-manager.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme/img/sso.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme/img/sso2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/conf-cdk-restaurant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/bin/conf-cdk-restaurant.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" afterDir="false" />
@@ -62,8 +68,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/randyvroegop/IdeaProjects/conf-cdk-restaurant",
+    "git-widget-placeholder": "chapter-1",
+    "last_opened_file_path": "/Users/randyvroegop/IdeaProjects/conf-cdk-restaurant/readme/img",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -79,11 +85,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/readme/img" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/website" />
       <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$/presentation/img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/website" />
@@ -116,7 +122,7 @@
       <updated>1693065886402</updated>
       <workItem from="1693065887938" duration="16611000" />
       <workItem from="1693114053904" duration="29009000" />
-      <workItem from="1695541008809" duration="47182000" />
+      <workItem from="1695541008809" duration="52947000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase">
       <option name="closed" value="true" />

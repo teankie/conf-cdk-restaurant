@@ -6,7 +6,6 @@
   },
   "scripts": {
     "build": "tsc && webpack",
-    "watch": "tsc -w",
     "serve": "webpack serve",
     "test": "tsc && jest",
     "cdk": "cdk"
