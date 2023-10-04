@@ -24,7 +24,7 @@ In this chapter we are going to do a few things:
 5. Install [AWS CLI via the official website](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 6. Then install CDK (`npm install -g aws-cdk`)
 7. Finally run `npm install`
-8. Run a few checks: `npm run build`, `npm run test`
+8. Run a few checks: `npm run build` `npm run test`
 9. Create an AWS SSO profile: `aws configure sso`
 10. Log in `aws sso login --profile {yourprofile}`
 11. Bootstrap your profile `cdk bootstrap --profile {yourprofile}`
