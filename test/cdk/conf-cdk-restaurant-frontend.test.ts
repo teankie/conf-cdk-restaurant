@@ -1,6 +1,6 @@
 import {App, Stack} from 'aws-cdk-lib';
 import {Template} from 'aws-cdk-lib/assertions';
-import {ConfCdkRestaurantFrontendStack} from "../lib/conf-cdk-restaurant-frontend-stack";
+import {ConfCdkRestaurantFrontendStack} from "../../lib/conf-cdk-restaurant-frontend-stack";
 import {MockStack} from "./mocks/stack";
 import {mockEnv} from "./mocks/env";
 

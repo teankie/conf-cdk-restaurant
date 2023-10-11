@@ -2,7 +2,7 @@ import {App, Stack} from 'aws-cdk-lib';
 import {Template} from 'aws-cdk-lib/assertions';
 import {MockStack} from "./mocks/stack";
 import {mockEnv} from "./mocks/env";
-import {ConfCdkRestaurantEventApiStack} from "../lib/conf-cdk-restaurant-event-api-stack";
+import {ConfCdkRestaurantEventApiStack} from "../../lib/conf-cdk-restaurant-event-api-stack";
 
 describe('Testing the ConfCdkRestaurantEventApiStack', () => {
     let app: App;
