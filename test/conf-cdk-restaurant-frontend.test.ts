@@ -1,42 +1,41 @@
-import { App } from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
-import {Certificate} from "aws-cdk-lib/aws-certificatemanager";
+import {App, Stack} from 'aws-cdk-lib';
+import {Template} from 'aws-cdk-lib/assertions';
 import {ConfCdkRestaurantFrontendStack} from "../lib/conf-cdk-restaurant-frontend-stack";
+import {MockStack} from "./mocks/stack";
+import {mockEnv} from "./mocks/env";
 
-test('S3 Bucket Created', () => {
-    const app = new App();
-    const stack = new ConfCdkRestaurantFrontendStack(app, 'TestStack', {
-        confCdkRestaurantDistributionCertificate: { certificateArn: 'arn:aws:fake:us-east-1:123456789012:example-fakename' } as Certificate,
-        env: { region: 'eu-west-1', account: '531843824238' }
-    }, 'subdomain');
+describe('Testing the front-end stack', () => {
+    let app: App;
+    let mockStack: MockStack;
 
-    const template = Template.fromStack(stack);
+    let stackUnderTest: Stack;
+    let template: Template;
 
-    template.hasResource('AWS::S3::Bucket', {});
-});
+    beforeAll(() => {
+        app = new App();
+        mockStack = new MockStack(app);
 
-test('CloudFront Distribution Created', () => {
-    const app = new App();
-    const stack = new ConfCdkRestaurantFrontendStack(app, 'TestStack', {
-        confCdkRestaurantDistributionCertificate: { certificateArn: 'arn:aws:fake:us-east-1:123456789012:example-fakename' } as Certificate,
-        env: { region: 'eu-west-1', account: '531843824238' }
-    }, 'subdomain');
+        stackUnderTest = new ConfCdkRestaurantFrontendStack(app, 'TestStack', {
+            eventApi: mockStack.mockApi,
+            confCdkRestaurantDistributionCertificate: mockStack.mockCertificate,
+            env: mockEnv
+        }, 'subdomain');
 
-    const template = Template.fromStack(stack);
-
-    template.hasResource('AWS::CloudFront::Distribution', {});
-});
-
-test('Route53 A Record Created for CloudFront Distribution', () => {
-    const app = new App();
-    const stack = new ConfCdkRestaurantFrontendStack(app, 'TestStack', {
-        confCdkRestaurantDistributionCertificate: { certificateArn: 'arn:aws:fake:us-east-1:123456789012:example-fakename' } as Certificate,
-        env: { region: 'eu-west-1', account: '531843824238' }
-    }, 'subdomain');
-
-    const template = Template.fromStack(stack);
-
-    template.hasResourceProperties('AWS::Route53::RecordSet', {
-        Type: 'A',
+        template = Template.fromStack(stackUnderTest)
     });
+
+    test('S3 Bucket Created', () => {
+        template.hasResource('AWS::S3::Bucket', {});
+    });
+
+    test('CloudFront Distribution Created', () => {
+        template.hasResource('AWS::CloudFront::Distribution', {});
+    });
+
+    test('Route53 A Record Created for CloudFront Distribution', () => {
+        template.hasResourceProperties('AWS::Route53::RecordSet', {
+            Type: 'A',
+        });
+    });
+
 });
