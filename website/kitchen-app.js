@@ -1,5 +1,4 @@
 import {LitElement, html, css} from 'lit';
-import kitchenjson from './kitchen.json';
 
 class KitchenApp extends LitElement {
     static get properties() {
@@ -18,7 +17,7 @@ class KitchenApp extends LitElement {
         super.connectedCallback()
 
         // replace this with api call
-        this.orders = kitchenjson.restaurant.orders;
+        this.orders = [];
     }
 
     getStatusIcon(status) {

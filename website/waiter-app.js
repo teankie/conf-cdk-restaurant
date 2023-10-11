@@ -1,5 +1,4 @@
 import {LitElement, html, css} from 'lit';
-import waiterjson from './waiter.json';
 
 class WaiterApp extends LitElement {
     static get properties() {
@@ -23,8 +22,8 @@ class WaiterApp extends LitElement {
         super.connectedCallback()
 
         // replace this with api call
-        this.tables = waiterjson.restaurant.tables;
-        this.products = waiterjson.restaurant.products;
+        this.tables = [];
+        this.products = [];
     }
 
     selectTable(id) {
