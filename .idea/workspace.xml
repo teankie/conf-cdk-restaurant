@@ -4,10 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="2ce3b47b-d24f-4ebb-8c65-176911081d1c" name="Changes" comment="Add website files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme/img/secret-manager.gif" beforeDir="false" afterPath="$PROJECT_DIR$/readme/img/secret-manager.gif" afterDir="false" />
+=======
+    <list default="true" id="2ce3b47b-d24f-4ebb-8c65-176911081d1c" name="Changes" comment="Change comments and readme">
+      <change afterPath="$PROJECT_DIR$/lambda/eventLambda/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant-event-api-stack.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-pipeline-stack.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/conf-cdk-restaurant-frontend-stack.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/kitchen.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/waiter.json" beforeDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +63,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+<<<<<<< Updated upstream
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/randyvroegop/IdeaProjects/conf-cdk-restaurant/readme/img",
+=======
+    "git-widget-placeholder": "final-chapter",
+    "last_opened_file_path": "/Users/randyvroegop/IdeaProjects/conf-cdk-restaurant/lib",
+>>>>>>> Stashed changes
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,11 +85,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/readme/img" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/website" />
       <recent name="$PROJECT_DIR$/test" />
-      <recent name="$PROJECT_DIR$/lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/website" />
