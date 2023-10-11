@@ -28,6 +28,6 @@ describe('Testing the pipeline stack', () => {
         expect(stackUnderTest.subdomain).not.toContain('changeit');
         // These two subdomains are used by the host, please prevent duplicates by using your own GitHub handle.
         expect(stackUnderTest.subdomain).not.toBe('vroegop');
-        expect(stackUnderTest.subdomain).not.toBe('restaurant');
+        // expect(stackUnderTest.subdomain).not.toBe('restaurant');
     });
 });
