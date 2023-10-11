@@ -10,7 +10,7 @@ export class ConfCdkPipeline extends cdk.Stack {
 
     // Change the subdomain into something else for readability, this will be your subdomain. Tests will fail until you do.
     // For uniqueness, I suggest your GitHub handle.
-    constructor(scope: Construct, id: string, props: cdk.StackProps, subdomain = 'restaurant-changeit') {
+    constructor(scope: Construct, id: string, props: cdk.StackProps, subdomain = 'restaurant') {
         super(scope, subdomain + id, props);
 
         this.subdomain = subdomain;
@@ -18,7 +18,7 @@ export class ConfCdkPipeline extends cdk.Stack {
         const pipeline = new CodePipeline(this, this.subdomain + '-ConfCdkPipeline', {
             pipelineName: this.subdomain + '-ConfCdkPipeline',
             synth: new ShellStep('Synth', {
-                input: CodePipelineSource.gitHub('changeit-username/changeit-reponame', 'main'),
+                input: CodePipelineSource.gitHub('vroegop/conf-cdk-restaurant', 'main'),
                 // Build before testing because the test checks if the built files can be deployed too
                 commands: ['npm ci', 'npm run build', 'npm run test', 'npx cdk synth']
             })
