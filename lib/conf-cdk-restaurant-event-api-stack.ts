@@ -57,7 +57,7 @@ export class ConfCdkRestaurantEventApiStack extends Stack {
             proxy: true,
             domainName: {
                 domainName: subdomain + '.cloud101.nl',
-                endpointType: EndpointType.PRIVATE,
+                endpointType: EndpointType.REGIONAL,
                 certificate: this.apiCertificate
             },
             defaultCorsPreflightOptions: {
