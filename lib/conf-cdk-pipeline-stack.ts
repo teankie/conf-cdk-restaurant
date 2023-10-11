@@ -18,7 +18,7 @@ export class ConfCdkPipeline extends cdk.Stack {
         const pipeline = new CodePipeline(this, this.subdomain + '-ConfCdkPipeline', {
             pipelineName: this.subdomain + '-ConfCdkPipeline',
             synth: new ShellStep('Synth', {
-                input: CodePipelineSource.gitHub('changeit', 'main'),
+                input: CodePipelineSource.gitHub('changeit-username/changeit-reponame', 'main'),
                 // Build before testing because the test checks if the built files can be deployed too
                 commands: ['npm ci', 'npm run build', 'npm run test', 'npx cdk synth']
             })
