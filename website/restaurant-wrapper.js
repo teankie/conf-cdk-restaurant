@@ -1,6 +1,8 @@
 // Import the LitElement base class and html helper function
 import { LitElement, html, css } from 'lit';
+import './kitchen-app.js';
 import './waiter-app.js';
+import './login-app.js';
 
 // Extend the LitElement base class
 class RestaurantWrapper extends LitElement {
@@ -8,7 +10,17 @@ class RestaurantWrapper extends LitElement {
         return html`
             <div class="phone">
                 <div class="screen">
+                    <login-app></login-app>
+                </div>
+            </div>
+            <div class="phone">
+                <div class="screen">
                     <waiter-app></waiter-app>
+                </div>
+            </div>
+            <div class="phone">
+                <div class="screen">
+                    <kitchen-app></kitchen-app>
                 </div>
             </div>
         `;
@@ -25,9 +37,7 @@ class RestaurantWrapper extends LitElement {
 
       counter-app, kitchen-app, waiter-app {
         height: 100%;
-      }
-      
-      .phone {
+      }.phone {
          width: 29vw;
          height: 90vh;
          border-radius: 36px;
