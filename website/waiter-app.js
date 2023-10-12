@@ -70,12 +70,12 @@ class WaiterApp extends LitElement {
             data: order
         };
 
-        fetch('/api', {
+        fetch('/api/restaurant', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(event)
+            body: JSON.stringify({ event })
         })
             .then(response => response.ok ? console.log('Successfully send to the API') : console.error(`Failed to send order with id ${order.id} to API:`, response))
             .catch(error => console.error(`Failed to send order with id ${order.id} to API:`, error));
