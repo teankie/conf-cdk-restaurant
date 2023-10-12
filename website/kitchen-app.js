@@ -22,7 +22,7 @@ class KitchenApp extends LitElement {
     }
 
     async getEvents() {
-        const events = await fetch('/api/restaurant');
+        const events = await fetch('/api/restaurant').then(response => response.json());
 
         this.orders = events.filter(event => event.eventType === 'CreatedOrder').map(orderCreatedEvent => {
             const order = {
