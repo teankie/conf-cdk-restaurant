@@ -16,22 +16,22 @@ describe('RestaurantEventHandler', () => {
         const event: APIGatewayEvent = {
             ...baseAPIGatewayEventMock,
             httpMethod: 'POST',
-            body: JSON.stringify({ event: { eventType: 'test', eventId: '1234' } }),
-            headers: {}, // and other necessary fields for APIGatewayEvent
+            body: JSON.stringify({ event: { eventType: 'test', eventId: '1234', timestamp: "2023-10-11T14:24:20.373Z" } }),
+            headers: {},
         };
 
         const handler = new RestaurantEventHandler(mockDbOps);
         const response = await handler.handler(event);
 
         expect(response.statusCode).toBe(200);
-        expect(mockDbOps.putItem).toHaveBeenCalledWith({ eventType: 'test', eventId: '1234' });
+        expect(mockDbOps.putItem).toHaveBeenCalledWith({ eventType: 'test', eventId: '1234', timestamp: "2023-10-11T14:24:20.373Z" });
     });
 
     it('should handle GET request', async () => {
         const event: APIGatewayEvent = {
             ...baseAPIGatewayEventMock,
             httpMethod: 'GET',
-            headers: {}, // and other necessary fields for APIGatewayEvent
+            headers: {},
         };
         mockDbOps.scanItems.mockResolvedValueOnce([]);
 
@@ -46,7 +46,7 @@ describe('RestaurantEventHandler', () => {
         const event: APIGatewayEvent = {
             ...baseAPIGatewayEventMock,
             httpMethod: 'DELETE',
-            headers: {}, // and other necessary fields for APIGatewayEvent
+            headers: {},
         };
 
         const handler = new RestaurantEventHandler(mockDbOps);
@@ -59,7 +59,7 @@ describe('RestaurantEventHandler', () => {
         const event: APIGatewayEvent = {
             ...baseAPIGatewayEventMock,
             httpMethod: 'POST',
-            headers: {}, // and other necessary fields for APIGatewayEvent
+            headers: {},
         };
 
         const handler = new RestaurantEventHandler(mockDbOps);

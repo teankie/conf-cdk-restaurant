@@ -1,5 +1,6 @@
 import {APIGatewayEvent} from "aws-lambda";
 
+// I only created this ugly beast of a mock to make strong-typed tests easier. No need to look at it.
 export const baseAPIGatewayEventMock: APIGatewayEvent = {
     body: null,
     headers: {},
