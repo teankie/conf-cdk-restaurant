@@ -1,6 +1,6 @@
 import {RemovalPolicy, Stack, StackProps} from 'aws-cdk-lib';
 import {Construct} from 'constructs';
-import {Cors, EndpointType, LambdaRestApi} from "aws-cdk-lib/aws-apigateway";
+import {AuthorizationType, Cors, EndpointType, LambdaRestApi} from "aws-cdk-lib/aws-apigateway";
 import {Code, Function, Runtime} from "aws-cdk-lib/aws-lambda";
 import {AttributeType, BillingMode, StreamViewType, Table} from "aws-cdk-lib/aws-dynamodb";
 import {Certificate, CertificateValidation} from "aws-cdk-lib/aws-certificatemanager";
@@ -66,6 +66,9 @@ export class ConfCdkRestaurantEventApiStack extends Stack {
                 allowHeaders: [ '*' ], // Add other allowed headers if needed
                 allowCredentials: true
             },
+            defaultMethodOptions: {
+                authorizationType: AuthorizationType.NONE
+            }
         });
 
         this.eventDatabase.applyRemovalPolicy(RemovalPolicy.DESTROY);
