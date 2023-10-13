@@ -7,6 +7,6 @@ node_modules
 .cdk.staging
 cdk.out
 !website/*
-website/dist
+**/dist
 !webpack.config.js
 .idea
