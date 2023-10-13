@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc && webpack",
     "serve": "webpack serve",
-    "test": "tsc && jest",
+    "test": "tsc && webpack && cdk synth && jest",
     "cdk": "cdk"
   },
   "devDependencies": {
