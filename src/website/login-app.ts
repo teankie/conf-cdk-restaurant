@@ -2,55 +2,7 @@
 import {LitElement, html, css} from 'lit';
 
 class LoginApp extends LitElement {
-
-    static styles = css`
-      :host {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        padding: 20px;
-        background-color: #2c3e50;
-        color: white;
-        border-radius: 10px;
-        margin: 0 auto;
-        font-family: Arial;
-        font-size: 20px;
-      }
-
-      div {
-        width: 100%;
-        padding: 10px 0;
-      }
-      
-      .buttons {
-        margin-top: 30px;
-      }
-
-      label, input, button {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-        border: none;
-        border-radius: 5px;
-        font-size: 20px;
-      }
-
-      input, button {
-        background-color: #34495e;
-        color: white;
-      }
-
-      button {
-        cursor: pointer;
-        margin: 10px 0;
-        border: 2px solid #457;
-      }
-      
-      button:hover {
-        background-color: #457;
-        border: 2px solid transparent;
-    }
-    `;
+    private showVerificationCodeInput: boolean;
 
     static properties = {
         showVerificationCodeInput: {type: Boolean}
@@ -113,6 +65,55 @@ class LoginApp extends LitElement {
                     `}
         `;
     }
+
+    static styles = css`
+      :host {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 20px;
+        background-color: #2c3e50;
+        color: white;
+        border-radius: 10px;
+        margin: 0 auto;
+        font-family: Arial;
+        font-size: 20px;
+      }
+
+      div {
+        width: 100%;
+        padding: 10px 0;
+      }
+      
+      .buttons {
+        margin-top: 30px;
+      }
+
+      label, input, button {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+      }
+
+      input, button {
+        background-color: #34495e;
+        color: white;
+      }
+
+      button {
+        cursor: pointer;
+        margin: 10px 0;
+        border: 2px solid #457;
+      }
+      
+      button:hover {
+        background-color: #457;
+        border: 2px solid transparent;
+    }
+    `;
 }
 
 customElements.define('login-app', LoginApp);

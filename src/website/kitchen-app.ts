@@ -1,6 +1,7 @@
 import {LitElement, html, css} from 'lit';
 
 class KitchenApp extends LitElement {
+    orders: Order[];
     static get properties() {
         return {
             orders: {type: Array},
@@ -16,15 +17,13 @@ class KitchenApp extends LitElement {
     connectedCallback() {
         super.connectedCallback();
 
-        this.orders = [];
-
         this.getEvents();
     }
 
     async getEvents() {
         const events = await fetch('/api/restaurant').then(response => response.json());
 
-        this.orders = events.filter(event => event.eventType === 'CreatedOrder').map(orderCreatedEvent => {
+        this.orders = events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
             const order = {
                 id: orderCreatedEvent.data.id,
                 items: orderCreatedEvent.data.products,
@@ -35,7 +34,7 @@ class KitchenApp extends LitElement {
         });
     }
 
-    getStatusIcon(status) {
+    getStatusIcon(status: string) {
         switch (status) {
             case 'preparing':
                 return html`<span class="material-symbols-outlined white">skillet</span>`;
@@ -57,11 +56,11 @@ class KitchenApp extends LitElement {
         }
     }
 
-    setOrderReady(order) {
+    setOrderReady(order: Order) {
         this.orders = this.orders.map(o => o === order ? {...o, status: 'ready'} : o);
     }
 
-    setOrderServed(order) {
+    setOrderServed(order: Order) {
         const newStatusOrder = {...order, status: 'served'};
         this.orders = this.orders.map(o => o === order ? newStatusOrder : o);
 
@@ -80,8 +79,8 @@ class KitchenApp extends LitElement {
                         ${order.id}
                     </h1>
                     <ul>
-                        ${order.items.map(item => html`
-                            <li>${item.name} <span style="float:right;">${item.quantity} x</span></li>
+                        ${order.products.map(item => html`
+                            <li>${item.product.name} <span style="float:right;">${item.quantity} x</span></li>
                         `)}
                     </ul>
                     ${order.status === 'preparing'

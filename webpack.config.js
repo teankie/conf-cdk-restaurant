@@ -1,27 +1,38 @@
-// webpack.config.js
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    mode: 'production', // set mode to production
-    entry: './website/restaurant-wrapper.js', // your main JS file
+    mode: 'production',
+    entry: './src/website/restaurant-wrapper.ts',
     output: {
         filename: 'main.js',
-        path: path.resolve(__dirname, './website/dist'), // output directory
+        path: path.resolve(__dirname, './src/website/dist'),
+    },
+    resolve: {
+        extensions: ['.ts', '.js'],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+        ],
     },
     devServer: {
         static: {
-            directory: 'website',
+            directory: './src/website',
         },
         open: true,
-        compress: true,
+        compress: false,
         port: 8001,
         liveReload: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './website/index.html', // Path to your index.html file
-            filename: 'index.html', // Output filename (placed in the 'dist' directory)
+            template: './src/website/index.html',
+            filename: 'index.html',
         }),
     ],
 };

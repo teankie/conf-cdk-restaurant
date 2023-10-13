@@ -2,11 +2,7 @@
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
-<<<<<<< Updated upstream
 ## Useful commands
-=======
-> Wait, all the CDK code looks exactly the same as chapter 1! Except some empty classes.
->>>>>>> Stashed changes
 
 * `npm run build`   compile typescript to js
 * `npm run test`    perform the jest unit tests
@@ -15,7 +11,6 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template
 
-<<<<<<< Updated upstream
 # Chapter 1
 
 Hello and welcome to Chapter 1!
@@ -117,45 +112,3 @@ You changed 'changeit' to something else, this will be your subdomain.
 > If you are on the Luminis Sandbox the url will be changeit.cloud101.nl
 
 > If you are on the Eleven Sandbox the url will be changeit.cloud111.nl
-=======
-> Yea that's intentional. It's your job to change the code now. Only the readme and website are updated. The empty classes are mainly to make sure stack names are consistent.
-> 
-> Don't forget to change 'changeit' to your selected phrase again. Use the exact same one otherwise duplicate stacks will rise, eat up all the resources and cause global warming.
-> 
-> Are you stuck and want to cheat you can peek at 'chapter 3'.
-
-Developers:
-
-> That's the most awesome thing ever, thank you great guide! Can I use ChatGPT too?
-
-Guide:
-
-> That's what we did, stuff like that will make our life easy.
-> 
-> The website, our front-end, code is updated in such a way that you should be able to only change CDK code and, with those changes, get the front-end functional. This means that deploying the stack as-is, you will end up with a front-end that does not work fully. On to quest 1!
-
-
-# Quest 1
-
-The restaurant is about to open. The website has a problem, all the data in the website was front-end only! The waiter and kitchen
-applications didn't communicate with each other.
-
-There were two files: kitchen.json and waiter.json. These files were useless. We need an API!
-
-What the restaurant needs from you:
-
-1. Create an API to which both the waiter and kitchen app can send requests
-2. Add a database to the API
-3. Make sure orders from the waiters are stored in the database
-4. Make sure the kitchen app can read those orders
-
-The website is already updated and both apps call the /api endpoint.
-
-We are planning on working event-driven. This means we send events to the API and to keep
-things simple for now, we also get events from the API. This is not optimal, we want to
-project the events to a readable datastructure later on, but the agile manifesto tells us:
-
-[Simplicity--the art of maximizing the amount of work not done--is essential.](https://agilemanifesto.org/principles.html)
-
-Hints are provided in the file `conf-cdk-restaurant-event-api-stack.ts`.
->>>>>>> Stashed changes

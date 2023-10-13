@@ -9,23 +9,27 @@ class WaiterApp extends LitElement {
         };
     }
 
+    tables: Table[];
+    products: Product[];
+    selectedTableName: string;
+
     constructor() {
         super();
 
         this.tables = [
             {
                 name: 'T1',
-                currentOrder: {products: [], status: 'open'},
+                currentOrder: {id: '0', products: [], status: 'open'},
                 previousOrders: []
             },
             {
                 name: 'T2',
-                currentOrder: {products: [], status: 'open'},
+                currentOrder: {id: '0', products: [], status: 'open'},
                 previousOrders: []
             },
             {
                 name: 'T3',
-                currentOrder: {products: [], status: 'open'},
+                currentOrder: {id: '0', products: [], status: 'open'},
                 previousOrders: []
             },
         ];
@@ -55,15 +59,38 @@ class WaiterApp extends LitElement {
                 "price": 7.99
             }
         ];
-        this.selectedTableName = null;
     }
 
     connectedCallback() {
         super.connectedCallback()
+
+        this.getPastEvents();
     }
 
-    sendOrderToAPI(order) {
-        const event = {
+    getCurrentTable(): Table {
+        return this.tables.find(t => t.name === this.selectedTableName);
+    }
+
+    getNextOrderId(table: Table) {
+        return (table.previousOrders.length + 1).toString();
+    }
+
+    async getPastEvents() {
+        const events = await fetch('/api/restaurant').then(response => response.json());
+
+        events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
+            const order = {
+                id: orderCreatedEvent.data.id,
+                items: orderCreatedEvent.data.products,
+                status: orderCreatedEvent.data.status,
+                orderPlacedTimestamp: orderCreatedEvent.timestamp
+            };
+            return order;
+        });
+    }
+
+    sendOrderToAPI(order: OrderEventOrder) {
+        const event: OrderEvent = {
             eventType: 'CreatedOrder',
             eventId: `${Date.now()}`, // generate a unique id for the event
             timestamp: new Date().toISOString(),
@@ -81,19 +108,19 @@ class WaiterApp extends LitElement {
             .catch(error => console.error(`Failed to send order with id ${order.id} to API:`, error));
     }
 
-    selectTable(name) {
+    selectTable(name: string) {
         this.selectedTableName = name;
     }
 
-    updateOrder(product, isAdding = true) {
-        const currentOrder = this.tables.find(t => t.name === this.selectedTableName).currentOrder;
-        let orderItem = currentOrder.products.find(item => item.id === product.id);
+    updateOrder(product: Product, isAdding = true) {
+        const currentOrder = this.getCurrentTable().currentOrder;
+        let orderItem = currentOrder.products.find(item => item.product.id === product.id);
 
         if (orderItem) {
             orderItem.quantity += isAdding ? 1 : -1;
             // Remove the item from the order if quantity is 0 or less
             if (orderItem.quantity <= 0) {
-                currentOrder.products = currentOrder.products.filter(item => item.id !== product.id);
+                currentOrder.products = currentOrder.products.filter(item => item.product.id !== product.id);
             }
         } else if (isAdding) {
             // If the item is not found and isAdding is true, add a new item with quantity 1
@@ -105,10 +132,10 @@ class WaiterApp extends LitElement {
     }
 
     confirmOrder() {
-        const currentOrder = {...this.tables.find(t => t.name === this.selectedTableName).currentOrder};
-        currentOrder.id = this.tables.find(t => t.name === this.selectedTableName).previousOrders.length + 1;
-        this.tables.find(t => t.name === this.selectedTableName).currentOrder = {products: [], status: 'open'};
-        this.tables.find(t => t.name === this.selectedTableName).previousOrders.push({
+        const currentOrder = {...this.getCurrentTable().currentOrder};
+        const nextOrderId = this.getNextOrderId(this.getCurrentTable());
+        this.getCurrentTable().currentOrder = {id: nextOrderId, products: [], status: 'open'};
+        this.getCurrentTable().previousOrders.push({
             ...currentOrder,
             status: 'pending'
         });
@@ -128,7 +155,7 @@ class WaiterApp extends LitElement {
         return html`
             <div class="tables">
                 ${Object.values(this.tables || {}).map(table => html`
-                    <button class="table-button" @click="${e => this.selectTable(table.name)}">
+                    <button class="table-button" @click="${() => this.selectTable(table.name)}">
                         <span class="material-symbols-outlined">table_restaurant</span>
                         ${table.name}
                     </button>`)}
@@ -139,7 +166,7 @@ class WaiterApp extends LitElement {
         return html`
             <div class="products">
                 ${this.products.map(product => html`
-                    <button class="product-button" @click="${e => this.updateOrder(product)}">
+                    <button class="product-button" @click="${() => this.updateOrder(product)}">
                         ${product.name}
                         <span class="material-symbols-outlined">${product.icon}</span>
                     </button>`)}
@@ -147,12 +174,12 @@ class WaiterApp extends LitElement {
     }
 
     renderOrder() {
-        return !this.tables.find(t => t.name === this.selectedTableName)?.currentOrder?.products?.length
+        return !this.getCurrentTable()?.currentOrder?.products?.length
             ? html`<p>No products ordered for ${this.selectedTableName}</p>`
-            : this.tables.find(t => t.name === this.selectedTableName)?.currentOrder?.products?.map(orderItem => html`
+            : this.getCurrentTable()?.currentOrder?.products?.map(orderItem => html`
                     <p>
                         <span class="material-symbols-outlined delete"
-                              @click="${e => this.updateOrder(orderItem, false)}">delete</span>
+                              @click="${() => this.updateOrder(orderItem.product, false)}">delete</span>
                         ${orderItem.product.name || 'Unknown product'}
                         <span style="float:right">${orderItem.quantity} x</span>
                     </p>`);
@@ -177,9 +204,9 @@ class WaiterApp extends LitElement {
                 </h2>
                 <div class="order">
                     ${this.selectedTableName ? this.renderOrder() : ''}
-                    ${!!this.tables.find(t => t.name === this.selectedTableName)?.currentOrder?.products?.length
+                    ${!!this.getCurrentTable()?.currentOrder?.products?.length
                             ? html`
-                                <button @click="${e => this.confirmOrder()}">Confirm order</button>`
+                                <button @click="${() => this.confirmOrder()}">Confirm order</button>`
                             : ''}
                 </div>
             </section>`;

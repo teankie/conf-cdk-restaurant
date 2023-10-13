@@ -1,4 +1,4 @@
-import { APIGatewayEvent } from 'aws-lambda';
+import {APIGatewayEvent} from 'aws-lambda';
 import {DatabaseOperations, IDatabaseOperations} from "./DatabaseOperations";
 
 export class RestaurantEventHandler {
@@ -10,12 +10,17 @@ export class RestaurantEventHandler {
     }
 
     async handler(request: APIGatewayEvent) {
-        const headers = { 'Content-Type': 'application/json' };
+        const headers = {
+            "Access-Control-Allow-Origin": "*", // Or specify the desired origin
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE", // Or any other methods you want to allow
+            "Access-Control-Allow-Headers": "Content-Type, Authorization", // Specify desired headers
+            'Content-Type': 'application/json'
+        };
 
         try {
             if (request.httpMethod === "POST") {
                 if (!request.body) throw new Error('Expected a restaurantEvent, but no data received');
-                const restaurantEvent: IRestaurantEvent = JSON.parse(request.body).event;
+                const restaurantEvent: OrderEvent = JSON.parse(request.body).event;
 
                 await this.database.putItem(restaurantEvent);
 

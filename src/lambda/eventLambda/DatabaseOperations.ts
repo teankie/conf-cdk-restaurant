@@ -12,7 +12,7 @@ export class DatabaseOperations implements IDatabaseOperations {
     private readonly tableName = process.env.EVENT_SOURCE_TABLE_NAME || '';
     private readonly dynamo = DynamoDBDocumentClient.from(new DynamoDBClient({}), { marshallOptions: { removeUndefinedValues: true } });
 
-    async putItem(item: IRestaurantEvent): Promise<void> {
+    async putItem(item: OrderEvent): Promise<void> {
         await this.dynamo.send(new PutCommand({
             TableName: this.tableName,
             Item: item

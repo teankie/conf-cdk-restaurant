@@ -1,8 +1,8 @@
 // Import the LitElement base class and html helper function
 import { LitElement, html, css } from 'lit';
-import './kitchen-app.js';
-import './waiter-app.js';
-import './login-app.js';
+import './kitchen-app';
+import './waiter-app';
+import './login-app';
 
 // Extend the LitElement base class
 class RestaurantWrapper extends LitElement {

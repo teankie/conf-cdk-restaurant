@@ -32,7 +32,7 @@ export class ConfCdkRestaurantEventApiStack extends Stack {
         this.eventLambda = new Function(this, subdomain + 'EventLambda', {
             functionName: subdomain + 'EventLambda',
             description: `Receives events from the API Gateway and stores in DynamodB. Deployed at ${new Date().toISOString()}`,
-            code: Code.fromAsset(`lambda/eventLambda`),
+            code: Code.fromAsset(`src/lambda/eventLambda`),
             runtime: Runtime.NODEJS_18_X,
             handler: 'index.handler',
             environment: {
