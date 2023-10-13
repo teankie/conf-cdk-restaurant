@@ -35,7 +35,7 @@ export class ConfCdkRestaurantFrontendStack extends Stack {
     // Deploy the website to the bucket
     new BucketDeployment(this, 'BucketDeployment', {
       destinationBucket: bucket,
-      sources: [ Source.asset(path.resolve(__dirname, '../website/dist')) ],
+      sources: [ Source.asset(path.resolve(__dirname, '../src/website/dist')) ],
       retainOnDelete: false,
     });
 
