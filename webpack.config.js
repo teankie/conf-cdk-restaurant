@@ -8,6 +8,7 @@ module.exports = {
         filename: 'main.js',
         path: path.resolve(__dirname, './src/website/dist'),
     },
+    devtool: 'source-map', // this ensures sourcemaps are generated as separate files
     resolve: {
         extensions: ['.ts', '.js'],
     },

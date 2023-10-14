@@ -1,7 +1,7 @@
 import {LitElement, html, css} from 'lit';
 
 class KitchenApp extends LitElement {
-    orders: Order[];
+    orders: OrderEventOrder[];
     static get properties() {
         return {
             orders: {type: Array},
@@ -21,23 +21,26 @@ class KitchenApp extends LitElement {
     }
 
     async getEvents() {
-        const events = await fetch('/api/restaurant').then(response => response.json());
+        const events = await fetch('https://restaurant.cloud101.nl/api/restaurant').then(response => response.json());
 
         this.orders = events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
             const order = {
                 id: orderCreatedEvent.data.id,
-                items: orderCreatedEvent.data.products,
-                status: orderCreatedEvent.data.status,
-                orderPlacedTimestamp: orderCreatedEvent.timestamp
+                products: orderCreatedEvent.data.products,
+                status: orderCreatedEvent.data.status === 'open' ? 'preparing' : orderCreatedEvent.data.status,
+                orderPlacedTimestamp: orderCreatedEvent.timestamp,
+                tableName: orderCreatedEvent.data.tableName
             };
             return order;
         });
+
+        console.log(this.orders);
     }
 
     getStatusIcon(status: string) {
         switch (status) {
             case 'preparing':
-                return html`<span class="material-symbols-outlined white">skillet</span>`;
+                return html`<span class="material-symbols-outlined gray">skillet</span>`;
             case 'ready':
                 return html`<span class="material-symbols-outlined darkgreen">done</span>`;
             case 'served':
@@ -56,11 +59,11 @@ class KitchenApp extends LitElement {
         }
     }
 
-    setOrderReady(order: Order) {
+    setOrderReady(order: OrderEventOrder) {
         this.orders = this.orders.map(o => o === order ? {...o, status: 'ready'} : o);
     }
 
-    setOrderServed(order: Order) {
+    setOrderServed(order: OrderEventOrder) {
         const newStatusOrder = {...order, status: 'served'};
         this.orders = this.orders.map(o => o === order ? newStatusOrder : o);
 
@@ -72,19 +75,19 @@ class KitchenApp extends LitElement {
             <h1 class="title">
                 Kitchen application <span class="material-symbols-outlined">skillet</span>
             </h1>
-            ${this.orders?.map((order, i) => html`
+            ${this.orders?.map((order) => html`
                 <section class="table-selection">
-                    <h1>
+                    <p class="gray">
                         ${this.getStatusIcon(order.status)}
-                        ${order.id}
-                    </h1>
+                        ${order.tableName + '-' + order.id}
+                    </p>
                     <ul>
-                        ${order.products.map(item => html`
+                        ${order.products?.map(item => html`
                             <li>${item.product.name} <span style="float:right;">${item.quantity} x</span></li>
                         `)}
                     </ul>
                     ${order.status === 'preparing'
-                        ? html`<button @click="${() => this.setOrderReady(order)}">Ready</button>`
+                        ? html`<button @click="${() => this.setOrderReady(order)}"><span class="material-symbols-outlined 20">check</span></button>`
                         : order.status !== 'served'
                             ? html`<button @click="${() => this.setOrderServed(order)}">Served</button>`
                             : html`<button disabled>Served</button>`
@@ -129,13 +132,16 @@ class KitchenApp extends LitElement {
       }
 
       section button {
-        font-size: 20px;
         border: 2px solid #457;
         border-radius: 5px;
         padding: 8px;
         margin: 4px;
         background-color: #34495e;
         color: white;
+      }
+      
+      button .material-symbols-outlined {
+        font-size: 20px;
       }
 
       section button:hover {
@@ -166,6 +172,10 @@ class KitchenApp extends LitElement {
 
       .orange {
         color: gold;
+      }
+      
+      .gray {
+        color: gray;
       }
 
       @keyframes countdown {

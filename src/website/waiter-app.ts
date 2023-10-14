@@ -76,17 +76,19 @@ class WaiterApp extends LitElement {
     }
 
     async getPastEvents() {
-        const events = await fetch('/api/restaurant').then(response => response.json());
+        const events = await fetch('https://restaurant.cloud101.nl/api/restaurant').then(response => response.json());
 
         events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
             const order = {
                 id: orderCreatedEvent.data.id,
-                items: orderCreatedEvent.data.products,
+                products: orderCreatedEvent.data.products,
                 status: orderCreatedEvent.data.status,
                 orderPlacedTimestamp: orderCreatedEvent.timestamp
             };
-            return order;
+            this.tables.find(table => table.name === orderCreatedEvent.data.tableName).previousOrders.push(order);
         });
+
+        this.tables.forEach(table => table.currentOrder.id = this.getNextOrderId(table));
     }
 
     sendOrderToAPI(order: OrderEventOrder) {
@@ -97,7 +99,7 @@ class WaiterApp extends LitElement {
             data: order
         };
 
-        fetch('/api/restaurant', {
+        fetch('https://restaurant.cloud101.nl/api/restaurant', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -200,7 +202,7 @@ class WaiterApp extends LitElement {
             </section>
             <section id="table-order">
                 <h2>
-                    ${this.selectedTableName ? `Orders for table ${this.selectedTableName}` : 'Select a table'}
+                    ${this.selectedTableName ? `Order ${this.getCurrentTable().currentOrder.id} for table ${this.selectedTableName}` : 'Select a table'}
                 </h2>
                 <div class="order">
                     ${this.selectedTableName ? this.renderOrder() : ''}
@@ -209,6 +211,9 @@ class WaiterApp extends LitElement {
                                 <button @click="${() => this.confirmOrder()}">Confirm order</button>`
                             : ''}
                 </div>
+                ${this.getCurrentTable()?.previousOrders.length
+                        ? html`<footer>${this.getCurrentTable()?.previousOrders.length} previous orders</footer>`
+                        : ''}
             </section>`;
     }
 
@@ -325,6 +330,16 @@ class WaiterApp extends LitElement {
       .material-symbols-outlined.delete:hover {
         cursor: pointer;
         color: red;
+      }
+      
+      section#table-order {
+        display:flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+      
+      section#table-order h2 {
+        margin: 0;
       }
     `];
 }
