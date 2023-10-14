@@ -1,4 +1,5 @@
 import {LitElement, html, css} from 'lit';
+import {subdomain} from "../../settings";
 
 class KitchenApp extends LitElement {
     orders: OrderEventOrder[];
@@ -21,7 +22,7 @@ class KitchenApp extends LitElement {
     }
 
     async getEvents() {
-        const events = await fetch('https://restaurant.cloud101.nl/api/restaurant').then(response => response.json());
+        const events = await fetch(`https://${subdomain}.cloud101.nl/api/restaurant`).then(response => response.json());
 
         this.orders = events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
             const order = {

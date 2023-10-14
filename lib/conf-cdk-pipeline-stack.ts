@@ -4,13 +4,12 @@ import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelin
 import {ConfCdkRestaurantFrontendStack} from "./conf-cdk-restaurant-frontend-stack";
 import {ConfCdkRestaurantGlobalStack} from "./conf-cdk-restaurant.global-stack";
 import {ConfCdkRestaurantEventApiStack} from "./conf-cdk-restaurant-event-api-stack";
+import {GitHubHandle, GitHubRepo, subdomain} from '../settings';
 
 export class ConfCdkPipeline extends cdk.Stack {
     public subdomain: string;
 
-    // Change the subdomain into something else for readability, this will be your subdomain. Tests will fail until you do.
-    // For uniqueness, I suggest your GitHub handle.
-    constructor(scope: Construct, id: string, props: cdk.StackProps, subdomain = 'restaurant') {
+    constructor(scope: Construct, id: string, props: cdk.StackProps) {
         super(scope, subdomain + id, props);
 
         this.subdomain = subdomain;
@@ -18,7 +17,7 @@ export class ConfCdkPipeline extends cdk.Stack {
         const pipeline = new CodePipeline(this, this.subdomain + '-ConfCdkPipeline', {
             pipelineName: this.subdomain + '-ConfCdkPipeline',
             synth: new ShellStep('Synth', {
-                input: CodePipelineSource.gitHub('vroegop/conf-cdk-restaurant', 'main'),
+                input: CodePipelineSource.gitHub(`${GitHubHandle}/${GitHubRepo}`, 'main'),
                 // Build before testing because the test checks if the built files can be deployed too
                 commands: ['npm ci', 'npm run build', 'npm run test', 'npx cdk synth']
             })

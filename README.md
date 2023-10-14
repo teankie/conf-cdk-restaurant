@@ -20,7 +20,7 @@ In this chapter we are going to do a few things:
 1. Create a fork of https://github.com/vroegop/conf-cdk-restaurant
 2. Create an access key in GitHub to allow AWS to create a webhook
 3. Add the access key to AWS Secrets Manager
-4. In your fork, change the strings with the words 'changeit' to something else
+4. Edit the settings.ts file
 5. Install [AWS CLI via the official website](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 6. Then install CDK (`npm install -g aws-cdk`)
 7. Finally run `npm install`
@@ -52,9 +52,7 @@ I usually check every box except deleting the repository and creating keys, not 
 
 ![secret-manager](./readme/img/secret-manager.gif)
 
-4. Change the word changeit to something else (like your GitHub handle for uniqueness)
-
- In the file `lib/conf-cdk-pipeline-stack.ts`
+4. Edit the settins.ts file and set the properties correctly
 
 5. Install [AWS CLI via the official website](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
@@ -95,8 +93,8 @@ This step is required and will create an S3 bucket with your configurations
 
 > `cdk deploy --profile {profile} {yourstackname}`
 
-* The stackname is `changeitPipeline`
-* This means if you set the profile and changeit to 'conference' the command would be:
+* The stackname is `${subdomain}Pipeline`
+* This means if you change the profile and change the subdomain to 'conference' the command would be:
 > `cdk deploy --profile conference conferencePipeline`
 * Deploying requires you to click yes a few times
 * Check the AWS Console, CodePipeline for the status
@@ -107,8 +105,8 @@ This step is required and will create an S3 bucket with your configurations
 
 If so, your website should be up and running!
 
-You changed 'changeit' to something else, this will be your subdomain.
+You changed the subdomain to something else, this will be your subdomain.
 
-> If you are on the Luminis Sandbox the url will be changeit.cloud101.nl
+> If you are on the Luminis Sandbox the url will be subdomain.cloud101.nl
 
-> If you are on the Eleven Sandbox the url will be changeit.cloud111.nl
+> If you are on the Eleven Sandbox the url will be subdomain.cloud111.nl

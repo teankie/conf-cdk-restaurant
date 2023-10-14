@@ -1,4 +1,5 @@
 import {LitElement, html, css} from 'lit';
+import {subdomain} from "../../settings";
 
 class WaiterApp extends LitElement {
     static get properties() {
@@ -76,7 +77,7 @@ class WaiterApp extends LitElement {
     }
 
     async getPastEvents() {
-        const events = await fetch('https://restaurant.cloud101.nl/api/restaurant').then(response => response.json());
+        const events = await fetch(`https://${subdomain}.cloud101.nl/api/restaurant`).then(response => response.json());
 
         events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
             const order = {
@@ -99,7 +100,7 @@ class WaiterApp extends LitElement {
             data: order
         };
 
-        fetch('https://restaurant.cloud101.nl/api/restaurant', {
+        fetch(`https://${subdomain}.cloud101.nl/api/restaurant`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
