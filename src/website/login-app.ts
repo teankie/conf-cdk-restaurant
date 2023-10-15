@@ -1,17 +1,11 @@
 // Import LitElement and html
 import {LitElement, html, css} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 
+@customElement('login-app')
 class LoginApp extends LitElement {
-    private showVerificationCodeInput: boolean;
-
-    static properties = {
-        showVerificationCodeInput: {type: Boolean}
-    };
-
-    constructor() {
-        super();
-        this.showVerificationCodeInput = false;
-    }
+    @property({ type: Boolean })
+    private showVerificationCodeInput: boolean = false;
 
     login() {
         console.log('Login method called');
@@ -115,5 +109,3 @@ class LoginApp extends LitElement {
     }
     `;
 }
-
-customElements.define('login-app', LoginApp);

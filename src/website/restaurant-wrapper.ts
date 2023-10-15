@@ -1,10 +1,10 @@
-// Import the LitElement base class and html helper function
 import { LitElement, html, css } from 'lit';
+import {customElement} from 'lit/decorators.js';
 import './kitchen-app';
 import './waiter-app';
 import './login-app';
 
-// Extend the LitElement base class
+@customElement('restaurant-wrapper')
 class RestaurantWrapper extends LitElement {
     render() {
         return html`
@@ -61,4 +61,3 @@ class RestaurantWrapper extends LitElement {
       }
     `;
 }
-customElements.define('restaurant-wrapper', RestaurantWrapper);

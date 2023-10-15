@@ -1,19 +1,13 @@
 import {LitElement, html, css} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 import {subdomain} from "../../settings";
 
+@customElement('kitchen-app')
 class KitchenApp extends LitElement {
-    orders: OrderEventOrder[];
-    static get properties() {
-        return {
-            orders: {type: Array},
-        };
-    }
-
-    constructor() {
-        super();
-
-        this.orders = [];
-    }
+    @property({ type: Array })
+    orders: OrderEventOrder[] = [];
+    @property({ type: Boolean })
+    isRefreshing: boolean = false;
 
     connectedCallback() {
         super.connectedCallback();
@@ -22,8 +16,10 @@ class KitchenApp extends LitElement {
     }
 
     async getEvents() {
+        this.isRefreshing = true;
         const events = await fetch(`https://${subdomain}.cloud101.nl/api/restaurant`).then(response => response.json());
 
+        this.isRefreshing = false;
         this.orders = events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
             const order = {
                 id: orderCreatedEvent.data.id,
@@ -34,8 +30,6 @@ class KitchenApp extends LitElement {
             };
             return order;
         });
-
-        console.log(this.orders);
     }
 
     getStatusIcon(status: string) {
@@ -74,7 +68,9 @@ class KitchenApp extends LitElement {
     render() {
         return html`
             <h1 class="title">
-                Kitchen application <span class="material-symbols-outlined">skillet</span>
+                Kitchen application
+                <span class="material-symbols-outlined">skillet</span>
+                <span class="material-symbols-outlined ${this.isRefreshing ? 'refreshing' : 'refresh'}" @click="${this.getEvents}">refresh</span>
             </h1>
             ${this.orders?.map((order) => html`
                 <section class="table-selection">
@@ -220,6 +216,26 @@ class KitchenApp extends LitElement {
         left: 50%;
         transform: translate(-50%, -50%);
       }
+
+        .refresh {
+            float: right;
+            cursor: pointer;
+        }
+
+        .refreshing {
+            float: right;
+            color: gray;
+            cursor: none;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
     `];
 }
-customElements.define('kitchen-app', KitchenApp);
