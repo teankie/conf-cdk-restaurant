@@ -2,9 +2,9 @@ interface OrderEvent {
     eventType: string;
     eventId: string;
     timestamp: string;
-    data: OrderEventOrder;
+    data: TableOrder;
 }
 
-interface OrderEventOrder extends Order {
+interface TableOrder extends Order {
     tableName: string
 }

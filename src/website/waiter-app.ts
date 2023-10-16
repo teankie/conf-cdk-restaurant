@@ -1,6 +1,7 @@
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import {subdomain} from "../../settings";
+import {OrderService} from './order-service';
+import { ApiService} from './api-service';
 
 @customElement('waiter-app')
 class WaiterApp extends LitElement {
@@ -9,45 +10,45 @@ class WaiterApp extends LitElement {
         {
             name: 'T1',
             currentOrder: {id: '0', products: [], status: 'open'},
-            previousOrders: []
+            previousOrders: [],
         },
         {
             name: 'T2',
             currentOrder: {id: '0', products: [], status: 'open'},
-            previousOrders: []
+            previousOrders: [],
         },
         {
             name: 'T3',
             currentOrder: {id: '0', products: [], status: 'open'},
-            previousOrders: []
+            previousOrders: [],
         },
     ];
     @property({type: Array})
-    products: Product[] = [
-        {
-            "id": "item1",
-            "name": "Ramen",
-            "icon": "ramen_dining",
-            "price": 5.99
-        },
+    products: Product[] = [{
+        "id": "item1",
+        "name": "Ramen",
+        "icon": "ramen_dining",
+        "price": 5.99,
+    }
+        ,
         {
             "id": "item2",
             "name": "Tapas",
             "icon": "tapas",
-            "price": 29.99
+            "price": 29.99,
         },
         {
             "id": "item3",
             "name": "Poke Bowl Salmon",
             "icon": "rice_bowl",
-            "price": 7.99
+            "price": 7.99,
         },
         {
             "id": "item4",
             "name": "Poke Bowl Tofu",
             "icon": "rice_bowl",
-            "price": 7.99
-        }
+            "price": 7.99,
+        },
     ];
     @property({type: String})
     selectedTableName: string;
@@ -55,7 +56,7 @@ class WaiterApp extends LitElement {
     connectedCallback() {
         super.connectedCallback()
 
-        this.getPastEvents();
+        this.getOrderData();
     }
 
     getCurrentTable(): Table {
@@ -66,39 +67,20 @@ class WaiterApp extends LitElement {
         return (table.previousOrders.length + 1).toString();
     }
 
-    async getPastEvents() {
-        const events = await fetch(`https://${subdomain}.cloud101.nl/api/restaurant`).then(response => response.json());
+    async getOrderData() {
+        const events = await ApiService.getEvents();
 
-        events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
-            const order = {
-                id: orderCreatedEvent.data.id,
-                products: orderCreatedEvent.data.products,
-                status: orderCreatedEvent.data.status,
-                orderPlacedTimestamp: orderCreatedEvent.timestamp
-            };
-            this.tables.find(table => table.name === orderCreatedEvent.data.tableName).previousOrders.push(order);
-        });
+        OrderService.eventsToKitchenOrders(events).map(orderCreatedEvent =>
+            this.tables.find(table => table.name === orderCreatedEvent.tableName).previousOrders.push(orderCreatedEvent),
+        );
 
         this.tables.forEach(table => table.currentOrder.id = this.getNextOrderId(table));
     }
 
-    sendOrderToAPI(order: OrderEventOrder) {
-        const event: OrderEvent = {
-            eventType: 'CreatedOrder',
-            eventId: `${Date.now()}`, // generate a unique id for the event
-            timestamp: new Date().toISOString(),
-            data: order
-        };
-
-        fetch(`https://${subdomain}.cloud101.nl/api/restaurant`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({event})
-        })
-            .then(response => response.ok ? console.log('Successfully send to the API') : console.error(`Failed to send order with id ${order.id} to API:`, response))
-            .catch(error => console.error(`Failed to send order with id ${order.id} to API:`, error));
+    sendOrderToAPI(tableOrder: TableOrder) {
+        ApiService.postOrderEvent(tableOrder)
+            .then(response => response.ok ? console.log('Successfully send to the API') : console.error(`Failed to send order with id ${tableOrder.id} to API:`, response))
+            .catch(error => console.error(`Failed to send order with id ${tableOrder.id} to API:`, error));
     }
 
     selectTable(name: string) {
@@ -107,18 +89,8 @@ class WaiterApp extends LitElement {
 
     updateOrder(product: Product, isAdding = true) {
         const currentOrder = this.getCurrentTable().currentOrder;
-        let orderItem = currentOrder.products.find(item => item.product.id === product.id);
-
-        if (orderItem) {
-            orderItem.quantity += isAdding ? 1 : -1;
-            // Remove the item from the order if quantity is 0 or less
-            if (orderItem.quantity <= 0) {
-                currentOrder.products = currentOrder.products.filter(item => item.product.id !== product.id);
-            }
-        } else if (isAdding) {
-            // If the item is not found and isAdding is true, add a new item with quantity 1
-            currentOrder.products.push({product, quantity: 1});
-        }
+        const newOrder = OrderService.addOrRemoveProduct(currentOrder, product, isAdding);
+        this.getCurrentTable().currentOrder = newOrder;
 
         // Re-render lit-html
         this.requestUpdate();
@@ -130,15 +102,15 @@ class WaiterApp extends LitElement {
         this.getCurrentTable().currentOrder = {id: nextOrderId, products: [], status: 'open'};
         this.getCurrentTable().previousOrders.push({
             ...currentOrder,
-            status: 'pending'
+            status: 'pending',
         });
 
-        const orderData = {
+        const tableOrder: TableOrder = {
             ...currentOrder,
-            tableName: this.selectedTableName
+            tableName: this.selectedTableName,
         }
 
-        this.sendOrderToAPI(orderData);
+        this.sendOrderToAPI(tableOrder);
 
         // Re-render lit-html
         this.requestUpdate();
@@ -161,7 +133,7 @@ class WaiterApp extends LitElement {
                 ${this.products.map(product => html`
                     <button class="product-button" @click="${() => this.updateOrder(product)}">
                         ${product.name}
-                        <span class="material-symbols-outlined">${product.icon}</span>
+                        ${product.icon ? html`<span class="material-symbols-outlined">${product.icon}</span>` : ''}
                     </button>`)}
             </div>`;
     }

@@ -1,11 +1,12 @@
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import {subdomain} from "../../settings";
+import {OrderService} from './order-service';
+import {ApiService} from './api-service';
 
 @customElement('kitchen-app')
 class KitchenApp extends LitElement {
     @property({ type: Array })
-    orders: OrderEventOrder[] = [];
+    orders: TableOrder[] = [];
     @property({ type: Boolean })
     isRefreshing: boolean = false;
 
@@ -17,19 +18,10 @@ class KitchenApp extends LitElement {
 
     async getEvents() {
         this.isRefreshing = true;
-        const events = await fetch(`https://${subdomain}.cloud101.nl/api/restaurant`).then(response => response.json());
+        const events = await ApiService.getEvents();
 
         this.isRefreshing = false;
-        this.orders = events.filter((event: any) => event.eventType === 'CreatedOrder').map((orderCreatedEvent: OrderEvent) => {
-            const order = {
-                id: orderCreatedEvent.data.id,
-                products: orderCreatedEvent.data.products,
-                status: orderCreatedEvent.data.status === 'open' ? 'preparing' : orderCreatedEvent.data.status,
-                orderPlacedTimestamp: orderCreatedEvent.timestamp,
-                tableName: orderCreatedEvent.data.tableName
-            };
-            return order;
-        });
+        this.orders = OrderService.eventsToKitchenOrders(events);
     }
 
     getStatusIcon(status: string) {
@@ -54,11 +46,11 @@ class KitchenApp extends LitElement {
         }
     }
 
-    setOrderReady(order: OrderEventOrder) {
+    setOrderReady(order: TableOrder) {
         this.orders = this.orders.map(o => o === order ? {...o, status: 'ready'} : o);
     }
 
-    setOrderServed(order: OrderEventOrder) {
+    setOrderServed(order: TableOrder) {
         const newStatusOrder = {...order, status: 'served'};
         this.orders = this.orders.map(o => o === order ? newStatusOrder : o);
 
@@ -93,149 +85,148 @@ class KitchenApp extends LitElement {
             `)}
         `;
     }
+    static styles = css`
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-    static styles = [css`
-      @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
-      
-      :host {
-        font-family: Arial;
-        display: block;
-        max-height: 100%;
-        overflow: auto;
-        background-color: #1c2e40;
-        color: white;
-      }
+    :host {
+      font-family: Arial;
+      display: block;
+      max-height: 100%;
+      overflow: auto;
+      background-color: #1c2e40;
+      color: white;
+    }
 
-      .material-symbols-outlined {
-        font-family: 'Material Symbols Outlined';
-        font-size: 34px;
-        vertical-align: bottom;
-        font-weight: normal;
-      }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-size: 34px;
+      vertical-align: bottom;
+      font-weight: normal;
+    }
 
-      .title {
-        text-align: center;
-        font-size: 24px;
-        margin: 0;
-      }
+    .title {
+      text-align: center;
+      font-size: 24px;
+      margin: 0;
+    }
 
-      section {
-        min-height: 200px;
-        padding: 0 5px;
-        background-color: #2c3e50;
-        border-top: 1px solid gray;
-        border-bottom: 1px solid gray;
-        font-size: 24px;
-      }
+    section {
+      min-height: 200px;
+      padding: 0 5px;
+      background-color: #2c3e50;
+      border-top: 1px solid gray;
+      border-bottom: 1px solid gray;
+      font-size: 24px;
+    }
 
-      section button {
-        border: 2px solid #457;
-        border-radius: 5px;
-        padding: 8px;
-        margin: 4px;
-        background-color: #34495e;
-        color: white;
-      }
-      
-      button .material-symbols-outlined {
-        font-size: 20px;
-      }
+    section button {
+      border: 2px solid #457;
+      border-radius: 5px;
+      padding: 8px;
+      margin: 4px;
+      background-color: #34495e;
+      color: white;
+    }
 
-      section button:hover {
-        background-color: #457;
-        border: 2px solid transparent;
-      }
+    section button .material-symbols-outlined {
+      font-size: 20px;
+    }
 
-      ul {
-        padding: 0;
-      }
+    section button:hover {
+      background-color: #457;
+      border: 2px solid transparent;
+    }
 
-      li {
-        border-bottom: 1px dotted #aaa;
-        list-style: none;
-      }
+    ul {
+      padding: 0;
+    }
 
-      .white {
-        color: white;
-      }
+    li {
+      border-bottom: 1px dotted #aaa;
+      list-style: none;
+    }
 
-      .darkgreen {
-        color: limegreen;
-      }
+    .white {
+      color: white;
+    }
 
-      .green {
-        color: lightgreen;
-      }
+    .darkgreen {
+      color: limegreen;
+    }
 
-      .orange {
-        color: gold;
-      }
-      
-      .gray {
-        color: gray;
-      }
+    .green {
+      color: lightgreen;
+    }
 
-      @keyframes countdown {
-        from {
-          stroke-dashoffset: 0;
-        }
-        to {
-          stroke-dashoffset: 106.8; /* new circumference of the circle */
-        }
-      }
+    .orange {
+      color: gold;
+    }
 
-      .countdown-container {
-        display: inline-block;
-        position: relative;
-        width: 34px;
-        height: 34px;
-      }
+    .gray {
+      color: gray;
+    }
 
-      .countdown {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 34px;
-        height: 34px;
-      }
-
-      .countdown circle {
-        fill: none;
-        stroke: limegreen;
-        stroke-width: 3;
-        stroke-dasharray: 106.8; /* new circumference of the circle */
+    @keyframes countdown {
+      from {
         stroke-dashoffset: 0;
-        animation: countdown 1s linear forwards;
       }
-
-      .countdown-container span {
-        z-index: 2;
-        color: limegreen;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+      to {
+        stroke-dashoffset: 106.8; /* new circumference of the circle */
       }
+    }
 
-        .refresh {
-            float: right;
-            cursor: pointer;
-        }
+    .countdown-container {
+      display: inline-block;
+      position: relative;
+      width: 34px;
+      height: 34px;
+    }
 
-        .refreshing {
-            float: right;
-            color: gray;
-            cursor: none;
-            animation: spin 2s linear infinite;
-        }
+    .countdown {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 34px;
+      height: 34px;
+    }
 
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    `];
+    .countdown circle {
+      fill: none;
+      stroke: limegreen;
+      stroke-width: 3;
+      stroke-dasharray: 106.8; /* new circumference of the circle */
+      stroke-dashoffset: 0;
+      animation: countdown 1s linear forwards;
+    }
+
+    .countdown-container span {
+      z-index: 2;
+      color: limegreen;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .refresh {
+      float: right;
+      cursor: pointer;
+    }
+
+    .refreshing {
+      float: right;
+      color: gray;
+      cursor: none;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  `;
 }
