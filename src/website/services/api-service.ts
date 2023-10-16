@@ -1,4 +1,4 @@
-import {subdomain} from '../../settings';
+import {subdomain} from '../../../settings';
 
 export class ApiService {
     static getEvents(): Promise<OrderEvent[]> {

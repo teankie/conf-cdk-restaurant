@@ -1,7 +1,7 @@
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import {OrderService} from './order-service';
-import {ApiService} from './api-service';
+import {OrderService} from '../services/order-service';
+import {ApiService} from '../services/api-service';
 
 @customElement('kitchen-app')
 class KitchenApp extends LitElement {

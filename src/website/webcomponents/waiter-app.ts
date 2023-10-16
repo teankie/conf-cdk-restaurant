@@ -1,7 +1,7 @@
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import {OrderService} from './order-service';
-import { ApiService} from './api-service';
+import {OrderService} from '../services/order-service';
+import {ApiService} from '../services/api-service';
 
 @customElement('waiter-app')
 class WaiterApp extends LitElement {
@@ -24,13 +24,13 @@ class WaiterApp extends LitElement {
         },
     ];
     @property({type: Array})
-    products: Product[] = [{
-        "id": "item1",
-        "name": "Ramen",
-        "icon": "ramen_dining",
-        "price": 5.99,
-    }
-        ,
+    products: Product[] = [
+        {
+            "id": "item1",
+            "name": "Ramen",
+            "icon": "ramen_dining",
+            "price": 5.99,
+        },
         {
             "id": "item2",
             "name": "Tapas",
@@ -41,7 +41,7 @@ class WaiterApp extends LitElement {
             "id": "item3",
             "name": "Poke Bowl Salmon",
             "icon": "rice_bowl",
-            "price": 7.99,
+            "price": 9.99,
         },
         {
             "id": "item4",
@@ -79,8 +79,8 @@ class WaiterApp extends LitElement {
 
     sendOrderToAPI(tableOrder: TableOrder) {
         ApiService.postOrderEvent(tableOrder)
-            .then(response => response.ok ? console.log('Successfully send to the API') : console.error(`Failed to send order with id ${tableOrder.id} to API:`, response))
-            .catch(error => console.error(`Failed to send order with id ${tableOrder.id} to API:`, error));
+                  .then(response => response.ok ? console.log('Successfully send to the API') : console.error(`Failed to send order with id ${tableOrder.id} to API:`, response))
+                  .catch(error => console.error(`Failed to send order with id ${tableOrder.id} to API:`, error));
     }
 
     selectTable(name: string) {
@@ -142,12 +142,12 @@ class WaiterApp extends LitElement {
         return !this.getCurrentTable()?.currentOrder?.products?.length
             ? html`<p>No products ordered for ${this.selectedTableName}</p>`
             : this.getCurrentTable()?.currentOrder?.products?.map(orderItem => html`
-                <p>
+                    <p>
                         <span class="material-symbols-outlined delete"
                               @click="${() => this.updateOrder(orderItem.product, false)}">delete</span>
-                    ${orderItem.product.name || 'Unknown product'}
-                    <span style="float:right">${orderItem.quantity} x</span>
-                </p>`);
+                        ${orderItem.product.name || 'Unknown product'}
+                        <span style="float:right">${orderItem.quantity} x</span>
+                    </p>`);
     }
 
     render() {
@@ -170,143 +170,143 @@ class WaiterApp extends LitElement {
                 <div class="order">
                     ${this.selectedTableName ? this.renderOrder() : ''}
                     ${!!this.getCurrentTable()?.currentOrder?.products?.length
-                        ? html`
-                            <button @click="${() => this.confirmOrder()}">Confirm order</button>`
-                        : ''}
+                            ? html`
+                                <button @click="${() => this.confirmOrder()}">Confirm order</button>`
+                            : ''}
                 </div>
                 ${this.getCurrentTable()
-                    ? this.getCurrentTable()?.previousOrders.length === 0 || this.getCurrentTable()?.previousOrders.length > 1
-                        ? html`
-                            <footer>${this.getCurrentTable()?.previousOrders.length} previous orders</footer>`
-                        : html`
-                            <footer>1 previous order</footer>`
-                    : ''}
+                        ? this.getCurrentTable()?.previousOrders.length === 0 || this.getCurrentTable()?.previousOrders.length > 1
+                                ? html`
+                                    <footer>${this.getCurrentTable()?.previousOrders.length} previous orders</footer>`
+                                : html`
+                                    <footer>1 previous order</footer>`
+                        : ''}
             </section>`;
     }
 
     static styles = [css`
-        :host {
-            border: 1px solid black;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-direction: column;
-            background-color: #1c2e40;
-            padding-bottom: 3px;
-            font-family: Arial;
-        }
+      :host {
+        border: 1px solid black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        background-color: #1c2e40;
+        padding-bottom: 3px;
+        font-family: Arial;
+      }
 
-        @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+      @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-        .material-symbols-outlined {
-            font-family: 'Material Symbols Outlined';
-            font-size: 25px;
-            vertical-align: bottom;
-            font-weight: normal;
-        }
+      .material-symbols-outlined {
+        font-family: 'Material Symbols Outlined';
+        font-size: 25px;
+        vertical-align: bottom;
+        font-weight: normal;
+      }
 
-        .title {
-            text-align: center;
-            color: white;
-            font-size: 20px;
-            margin: 0;
-        }
+      .title {
+        text-align: center;
+        color: white;
+        font-size: 20px;
+        margin: 0;
+      }
 
-        h2 {
-            color: white;
-        }
+      h2 {
+        color: white;
+      }
 
-        section {
-            height: 31%;
-            width: 96%;
-            padding: 0 5px;
-            background-color: #2c3e50;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
+      section {
+        height: 31%;
+        width: 96%;
+        padding: 0 5px;
+        background-color: #2c3e50;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
 
-        section p {
-            font-size: 20px;
-            color: white;
-        }
+      section p {
+        font-size: 20px;
+        color: white;
+      }
 
-        section button {
-            font-size: 20px;
-            border: 2px solid #457;
-            border-radius: 5px;
-            padding: 8px;
-            margin: 4px;
-            background-color: #34495e;
-            color: white;
-        }
+      section button {
+        font-size: 20px;
+        border: 2px solid #457;
+        border-radius: 5px;
+        padding: 8px;
+        margin: 4px;
+        background-color: #34495e;
+        color: white;
+      }
 
-        section button:hover {
-            background-color: #457;
-            border: 2px solid transparent;
-        }
+      section button:hover {
+        background-color: #457;
+        border: 2px solid transparent;
+      }
 
-        div.tables, div.products {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
+      div.tables, div.products {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
 
-        .table-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            margin: 8px;
-            border: 2px solid #457;
-            background-color: #34495e;
-            color: white;
-            border-radius: 50%;
-            cursor: pointer;
-            text-transform: uppercase;
-            width: 20%;
-            aspect-ratio: 1 / 1;
-        }
+      .table-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 8px;
+        border: 2px solid #457;
+        background-color: #34495e;
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        text-transform: uppercase;
+        width: 20%;
+        aspect-ratio: 1 / 1;
+      }
 
-        .table-button:hover {
-            background-color: #457;
-            border: 2px solid #333;
-        }
+      .table-button:hover {
+        background-color: #457;
+        border: 2px solid #333;
+      }
 
-        .product-button {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            padding: 4px;
-            margin-bottom: 15px;
-            background-color: #34495e;
-            color: white;
-            border: 2px solid #457;
-            border-radius: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-            width: 90%;
-            font-size: 20px;
-        }
+      .product-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        padding: 4px;
+        margin-bottom: 15px;
+        background-color: #34495e;
+        color: white;
+        border: 2px solid #457;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+        width: 90%;
+        font-size: 20px;
+      }
 
-        .product-button:hover {
-            background-color: #457;
-            border: 2px solid #333;
-        }
+      .product-button:hover {
+        background-color: #457;
+        border: 2px solid #333;
+      }
 
-        .material-symbols-outlined.delete:hover {
-            cursor: pointer;
-            color: red;
-        }
+      .material-symbols-outlined.delete:hover {
+        cursor: pointer;
+        color: red;
+      }
 
-        section#table-order {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
-        }
+      section#table-order {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
 
-        section#table-order h2 {
-            margin: 0;
-        }
+      section#table-order h2 {
+        margin: 0;
+      }
     `];
 }

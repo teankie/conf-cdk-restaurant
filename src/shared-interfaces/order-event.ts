@@ -4,7 +4,3 @@ interface OrderEvent {
     timestamp: string;
     data: TableOrder;
 }
-
-interface TableOrder extends Order {
-    tableName: string
-}

@@ -1,4 +1,4 @@
-import {OrderService} from '../../website/order-service';
+import {OrderService} from '../../website/services/order-service';
 
 describe('OrderService', () => {
     describe('eventsToKitchenOrders', () => {

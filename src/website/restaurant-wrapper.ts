@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import {customElement} from 'lit/decorators.js';
-import './kitchen-app';
-import './waiter-app';
-import './login-app';
+import './webcomponents/kitchen-app';
+import './webcomponents/waiter-app';
+import './webcomponents/login-app';
 
 @customElement('restaurant-wrapper')
 class RestaurantWrapper extends LitElement {
