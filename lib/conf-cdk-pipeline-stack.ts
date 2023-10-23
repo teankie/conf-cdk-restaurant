@@ -42,11 +42,13 @@ export class ConfCdkPipelineStage extends cdk.Stage {
             },
         }, subdomain);
 
-        const confCdkRestaurantEventApiStack = new ConfCdkRestaurantEventApiStack(this, subdomain + '-confCdkRestaurantEventApiStack', props, subdomain);
+        // Todo: uncomment this line (this makes sure the stack is deployed via AWS CodePipeline)
+        // const confCdkRestaurantEventApiStack = new ConfCdkRestaurantEventApiStack(this, subdomain + '-confCdkRestaurantEventApiStack', props, subdomain);
 
         const confCdkRestaurantFrontendStack = new ConfCdkRestaurantFrontendStack(this, subdomain + '-confCdkRestaurantFrontendStack', {
             ...props,
-            eventApi: confCdkRestaurantEventApiStack.eventLambdaApi,
+            // Todo: uncomment this line to provide the API to the frontend stack so it can add an endpoint to the distribution
+            // eventApi: confCdkRestaurantEventApiStack.eventLambdaApi,
             confCdkRestaurantDistributionCertificate: confCdkRestaurantGlobalStack.confCdkRestaurantDistributionCertificate,
             crossRegionReferences: true,
         }, subdomain);
