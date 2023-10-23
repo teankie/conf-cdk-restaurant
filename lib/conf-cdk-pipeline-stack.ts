@@ -3,7 +3,6 @@ import { Construct } from 'constructs';
 import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import {ConfCdkRestaurantFrontendStack} from "./conf-cdk-restaurant-frontend-stack";
 import {ConfCdkRestaurantGlobalStack} from "./conf-cdk-restaurant.global-stack";
-import {ConfCdkRestaurantEventApiStack} from "./conf-cdk-restaurant-event-api-stack";
 import {GitHubHandle, GitHubRepo, subdomain} from '../settings';
 
 export class ConfCdkPipeline extends cdk.Stack {
@@ -42,13 +41,8 @@ export class ConfCdkPipelineStage extends cdk.Stage {
             },
         }, subdomain);
 
-        // Todo: uncomment this line (this makes sure the stack is deployed via AWS CodePipeline)
-        // const confCdkRestaurantEventApiStack = new ConfCdkRestaurantEventApiStack(this, subdomain + '-confCdkRestaurantEventApiStack', props, subdomain);
-
         const confCdkRestaurantFrontendStack = new ConfCdkRestaurantFrontendStack(this, subdomain + '-confCdkRestaurantFrontendStack', {
             ...props,
-            // Todo: uncomment this line to provide the API to the frontend stack so it can add an endpoint to the distribution
-            // eventApi: confCdkRestaurantEventApiStack.eventLambdaApi,
             confCdkRestaurantDistributionCertificate: confCdkRestaurantGlobalStack.confCdkRestaurantDistributionCertificate,
             crossRegionReferences: true,
         }, subdomain);

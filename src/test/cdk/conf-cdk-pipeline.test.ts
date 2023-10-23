@@ -1,20 +1,16 @@
-import {App, Stack} from "aws-cdk-lib";
+import {App} from "aws-cdk-lib";
 import {Template} from "aws-cdk-lib/assertions";
 import {ConfCdkPipeline} from "../../../lib/conf-cdk-pipeline-stack";
-import {MockStack} from "./mocks/stack";
-import {ConfCdkRestaurantGlobalStack} from "../../../lib/conf-cdk-restaurant.global-stack";
 
 
 describe('Testing the pipeline stack', () => {
     let app: App;
-    let mockStack: MockStack;
 
     let stackUnderTest: ConfCdkPipeline;
     let template: Template;
 
     beforeAll(() => {
         app = new App();
-        mockStack = new MockStack(app);
 
         stackUnderTest = new ConfCdkPipeline(app, 'TestStack', {
             env: {region: 'eu-west-1', account: '531843824238'}

@@ -16,7 +16,6 @@ describe('Testing the front-end stack', () => {
         mockStack = new MockStack(app);
 
         stackUnderTest = new ConfCdkRestaurantFrontendStack(app, 'TestStack', {
-            eventApi: mockStack.mockApi,
             confCdkRestaurantDistributionCertificate: mockStack.mockCertificate,
             env: mockEnv
         }, 'subdomain');
